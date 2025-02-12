@@ -1,5 +1,5 @@
-import { date_Format } from "./base"
-import { Languages } from "./types"
+import { PUtils } from "pols-utils"
+import { PLanguages } from "pols-utils/constants"
 
 export type PDateParams = string | number | Date | PDate | {
 	year?: number
@@ -235,9 +235,9 @@ export class PDate {
 		return Math.ceil(((ref1.time ?? 0) - (ref2.time ?? 0)) / 1000 / 60)
 	}
 
-	toString(mask = '@y-@mm-@dd @hh:@ii:@ss.@lll', language: Languages = 'spanish') {
+	toString(mask = '@y-@mm-@dd @hh:@ii:@ss.@lll', language = PLanguages.SPANISH) {
 		if (this.isInvalidDate) return ''
-		return date_Format(this.engine, mask, language)
+		return PUtils.Date.format(this.engine, mask, language)
 	}
 
 	toDate() {
@@ -246,5 +246,9 @@ export class PDate {
 
 	clone() {
 		return new PDate(this.engine)
+	}
+
+	toJSON() {
+		return this.toString()
 	}
 }
