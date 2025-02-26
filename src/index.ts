@@ -158,7 +158,7 @@ export class PDate {
 			let miliseconds: number
 
 			/* Formato estandar yyyy-mm-dd, la hora es opcional */
-			let parts = value.match(/^([0-9]{4})-([0-9]{2})-([0-9]{2})((T|\s)([0-9]{2}):([0-9]{2}):([0-9]{2})(\.([0-9]{3})Z?)?)$/)
+			let parts = value.match(/^([0-9]{4})-([0-9]{2})-([0-9]{2})((T|\s)([0-9]{2}):([0-9]{2}):([0-9]{2})(\.([0-9]{3})Z?)?)?$/)
 			if (parts) {
 				year = Number(parts[1])
 				month = Number(parts[2]) - 1

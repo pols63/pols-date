@@ -1,6 +1,6 @@
-import { PDate } from '../src/pdate'
+import { PDate } from '../src/index'
 
-const fecha = new PDate('2024-10-28 23:56:00')
+const fecha = new PDate('2024-10-28')
 console.log(fecha.toString())
 
 const fecha2 = new PDate('2024-10-28 23:57:10.056')
