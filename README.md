@@ -19,9 +19,13 @@ const mydate = new PDate
 
 ### Pass string parameter
 ```javascript
-const mydate1 = new PDate('2025-03-06') //Pass only date. Time is 00:00:00.000
-const mydate2 = new PDate('2025-03-06 18:30:00') //Pass date and time
-const mydate3 = new PDate('2025-03-06 18:30:00.000') //Pass date and time with millisecond
+const mydate1 = new PDate('2025-03-06') // Pass only date. Time is 00:00:00.000
+const mydate2 = new PDate('2025-03-06 18:30:00') // Pass date and time
+const mydate3 = new PDate('2025-03-06 18:30:00.000') // Pass date and time with millisecond
+const mydate4 = new PDate('1') // Create a date with current year, current month, 1st, and current clock time
+const mydate5 = new PDate('15') // Create a date with current year, current month, 15th, and current clock time
+const mydate5 = new PDate('1503') // Create a date with current year, March, 15th, and current clock time
+const mydate5 = new PDate('150325') // Create a date with 2025, March, 15th, and current clock time
 ```
 
 ### Use Date object
