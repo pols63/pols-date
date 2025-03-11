@@ -242,10 +242,12 @@ export class PDate {
 	}
 
 	toDate() {
+		if (this.isInvalidDate) return null
 		return new Date(this.engine)
 	}
 
 	clone() {
+		if (this.isInvalidDate) return null
 		return new PDate(this.engine)
 	}
 
