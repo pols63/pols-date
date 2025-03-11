@@ -1,9 +1,6 @@
 import { PDate } from '../src/index'
 
-const fecha = new PDate('2024-10-28')
-console.log(fecha.toString())
-
-const fecha2 = new PDate('2024-10-28 23:57:10.056')
-console.log(fecha2.toString())
-
-console.log(fecha2.minutesDifference(fecha))
+const date1 = new PDate('2025-01-01 00:01:00')
+const date2 = new PDate('2025-01-01 00:58:30')
+console.log(date1.minutesDifference(date2)) // -9
+console.log(date2.minutesDifference(date1)) // 9

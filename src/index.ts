@@ -12,6 +12,7 @@ export type PDateParams = string | number | Date | PDate | {
 }
 
 export class PDate {
+	static defaultLanguage: PLanguages = PLanguages.ENGLISH
 	engine?: Date
 
 	get isInvalidDate() {
@@ -53,7 +54,7 @@ export class PDate {
 			return
 		} else {
 			const onejan = new Date(this.year ?? 1, 0, 1)
-			return Math.ceil((((this.time ?? 0) - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7)
+			return Math.ceil((((this.timestamp ?? 0) - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7)
 		}
 	}
 
@@ -131,7 +132,7 @@ export class PDate {
 		return this
 	}
 
-	get time() {
+	get timestamp() {
 		return this.engine?.getTime()
 	}
 
@@ -197,17 +198,17 @@ export class PDate {
 		return this
 	}
 
-	setTime(value?: string) {
+	setClockTime(value?: string) {
 		if (value != null) {
 			const temp = new Date(`${this.toString('@y-@mm-@dd')} ${value}`)
 			this.engine = temp
 		} else {
-			this.clearTime()
+			this.clearClockTime()
 		}
 		return this
 	}
 
-	clearTime() {
+	clearClockTime() {
 		this.engine?.setHours(0)
 		this.engine?.setMinutes(0)
 		this.engine?.setSeconds(0)
@@ -218,9 +219,9 @@ export class PDate {
 	daysDifference(other: PDate) {
 		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
 		if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
-		const ref1 = this.clone().clearTime()
-		const ref2 = other.clone().clearTime()
-		return Math.ceil(((ref1.time ?? 0) - (ref2.time ?? 0)) / 1000 / 60 / 60 / 24)
+		const ref1 = this.clone().clearClockTime()
+		const ref2 = other.clone().clearClockTime()
+		return Math.ceil(((ref1.timestamp ?? 0) - (ref2.timestamp ?? 0)) / 1000 / 60 / 60 / 24)
 	}
 
 	minutesDifference(other: PDate) {
@@ -232,12 +233,12 @@ export class PDate {
 		const ref2 = other.clone()
 		ref2.second = 0
 		ref2.millisecond = 0
-		return Math.ceil(((ref1.time ?? 0) - (ref2.time ?? 0)) / 1000 / 60)
+		return Math.ceil(((ref1.timestamp ?? 0) - (ref2.timestamp ?? 0)) / 1000 / 60)
 	}
 
-	toString(mask = '@y-@mm-@dd @hh:@ii:@ss.@lll', language = PLanguages.SPANISH) {
+	toString(mask = '@y-@mm-@dd @hh:@ii:@ss.@lll', language?: PLanguages) {
 		if (this.isInvalidDate) return ''
-		return PUtils.Date.format(this.engine, mask, language)
+		return PUtils.Date.format(this.engine, mask, language ?? PDate.defaultLanguage)
 	}
 
 	toDate() {
