@@ -11,6 +11,10 @@ export type PDateParams = string | number | Date | PDate | {
 	millisecond?: number
 }
 
+const ERROR_MESSAGES = {
+	isInvalidDate: `The date is invalid`
+}
+
 export class PDate {
 	static defaultLanguage: PLanguages = PLanguages.ENGLISH
 	engine?: Date
@@ -24,12 +28,12 @@ export class PDate {
 	}
 
 	set year(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.engine?.setFullYear(value)
 	}
 
 	addYear(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.year = (this.year ?? 1) + value
 		return this
 	}
@@ -40,7 +44,7 @@ export class PDate {
 	}
 
 	addMonth(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.month = (this.month ?? 1) + value
 		return this
 	}
@@ -67,7 +71,7 @@ export class PDate {
 	}
 
 	addDay(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.day = (this.day ?? 1) + value
 		return this
 	}
@@ -81,7 +85,7 @@ export class PDate {
 	}
 
 	addHour(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.hour = (this.hour ?? 0) + value
 		return this
 	}
@@ -99,7 +103,7 @@ export class PDate {
 	}
 
 	addMinute(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.minute = (this.minute ?? 0) + value
 		return this
 	}
@@ -113,7 +117,7 @@ export class PDate {
 	}
 
 	addSecond(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.second = (this.second ?? 0) + value
 		return this
 	}
@@ -127,7 +131,7 @@ export class PDate {
 	}
 
 	addMillisecond(value: number) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.millisecond = (this.millisecond ?? 0) + value
 		return this
 	}
@@ -217,7 +221,7 @@ export class PDate {
 	}
 
 	daysDifference(other: PDate) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
 		const ref1 = this.clone().clearClockTime()
 		const ref2 = other.clone().clearClockTime()
@@ -225,7 +229,7 @@ export class PDate {
 	}
 
 	minutesDifference(other: PDate) {
-		if (this.isInvalidDate) throw new Error(`Este objeto es un InvalidDate`)
+		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
 		const ref1 = this.clone()
 		ref1.second = 0
@@ -242,12 +246,12 @@ export class PDate {
 	}
 
 	toDate() {
-		if (this.isInvalidDate) return null
+		if (this.isInvalidDate) return
 		return new Date(this.engine)
 	}
 
 	clone() {
-		if (this.isInvalidDate) return null
+		if (this.isInvalidDate) return
 		return new PDate(this.engine)
 	}
 
