@@ -159,11 +159,11 @@ console.log(date.toString('@dd/@mm/@y')) // 06/03/2025
 ```javascript
 const date = new PDate('2025-03-06 18:30:45.567')
 
-date.month = 12 // 2025-12-06 18:30:45.567
-date.month += 2 // 2026-02-06 18:30:45.567
-date.addMonth(2) // 2026-04-06 18:30:45.567; same to date.month += 2
-date.addMonth(-3) // 2026-01-06 18:30:45.567; same to date.month -= 3
-date.addMonth(1).addDay(3) // 2026-02-09 18:30:45.567
+date.month = 11 // Set month to 11: 2025-11-06 18:30:45.567
+date.month += 2 // Add two months: 2026-01-06 18:30:45.567
+date.addMonth(2) // Add two months: 2026-03-06 18:30:45.567; same to date.month += 2
+date.addMonth(-3) // Substract three months: 2025-12-06 18:30:45.567; same to date.month -= 3
+date.addMonth(1).addDay(3) // Add one month and three days: 2025-01-09 18:30:45.567
 ```
 
 ### Invalid date
