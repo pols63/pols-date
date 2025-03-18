@@ -5,4 +5,8 @@ import { PDate } from '../src/index'
 // console.log(date1.minutesDifference(date2)) // -9
 // console.log(date2.minutesDifference(date1)) // 9
 
-console.log(new PDate('2025'))
+// console.log(new PDate('2025'))
+
+// console.log(new PDate('13:00:00'))
+
+console.log(new PDate('2025-03-07 00:00:00.000'))
