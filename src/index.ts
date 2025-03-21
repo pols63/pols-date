@@ -1,6 +1,9 @@
 import { PUtils } from "pols-utils"
 import { PLanguages } from "pols-utils/constants"
 
+/**
+ * Type for the constructor parameter.
+ */
 export type PDateParams = string | number | Date | PDate | {
 	year?: number
 	month?: number
@@ -15,6 +18,9 @@ const ERROR_MESSAGES = {
 	isInvalidDate: `The date is invalid`
 }
 
+/**
+ * Class for managin date and time.
+ */
 export class PDate {
 	static defaultLanguage: PLanguages = PLanguages.ENGLISH
 	engine?: Date
@@ -140,11 +146,16 @@ export class PDate {
 		return this.engine?.getTime()
 	}
 
+	get utcTimestamp() {
+		if (this.isInvalidDate) return null
+		return this.engine?.getTime() - this.engine?.getTimezoneOffset() * 60000
+	}
+
 	constructor(params?: PDateParams) {
 		if (!params) {
 			this.engine = new Date
 		} else {
-			if (typeof params == 'string' || typeof params == 'number' || params instanceof Date || params instanceof PDate) {
+			if (typeof params == 'string' || typeof params == 'number' || params instanceof Date || 'toDate' in params) {
 				this.setFrom(params)
 			} else {
 				this.engine = new Date(params.year ?? 1, (params.month ?? 1) - 1, params.day ?? 1, params.hour ?? 0, params.minute ?? 0, params.second ?? 0, params.millisecond ?? 0)

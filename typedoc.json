@@ -1,0 +1,21 @@
+{
+	"entryPoints": [
+		"src/index.ts"
+	],
+	"entryPointStrategy": "expand",
+	"out": "docs",
+	"tsconfig": "tsconfig.json",
+	"includeVersion": true,
+	"readme": "README.md",
+	"excludePrivate": true,
+	"excludeProtected": true,
+	"excludeExternals": true,
+	// "excludeTags": [
+	// 	"@returns"
+	// ],
+	"sort": [
+		"kind",
+		"instance-first",
+		"alphabetical-ignoring-documents"
+	]
+}
