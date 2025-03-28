@@ -22,6 +22,7 @@ const ERROR_MESSAGES = {
  */
 export class PDate {
 	static defaultLanguage: PUtilsDate.PLanguages = PUtilsDate.PLanguages.ENGLISH
+	static defaultMask: string = '@y-@mm-@dd @hh:@ii:@ss.@lll'
 	engine?: Date
 
 	get isInvalidDate() {
@@ -250,9 +251,9 @@ export class PDate {
 		return Math.ceil(((ref1.timestamp ?? 0) - (ref2.timestamp ?? 0)) / 1000 / 60)
 	}
 
-	toString(mask = '@y-@mm-@dd @hh:@ii:@ss.@lll', language?: PUtilsDate.PLanguages) {
+	toString(mask?: string, language?: PUtilsDate.PLanguages) {
 		if (this.isInvalidDate) return ''
-		return PUtilsDate.format(this.engine, mask, language ?? PDate.defaultLanguage)
+		return PUtilsDate.format(this.engine, mask ?? PDate.defaultMask, language ?? PDate.defaultLanguage)
 	}
 
 	toDate() {
