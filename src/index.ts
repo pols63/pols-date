@@ -1,4 +1,4 @@
-import { PUtilsDate } from "pols-utils"
+import { PLanguages, PUtilsDate } from "pols-utils"
 
 /**
  * Type for the constructor parameter.
@@ -21,7 +21,7 @@ const ERROR_MESSAGES = {
  * Class for managin date and time.
  */
 export class PDate {
-	static defaultLanguage: PUtilsDate.PLanguages = PUtilsDate.PLanguages.ENGLISH
+	static defaultLanguage: PLanguages = PLanguages.ENGLISH
 	static defaultMask: string = '@y-@mm-@dd @hh:@ii:@ss.@lll'
 	engine?: Date
 
@@ -251,7 +251,7 @@ export class PDate {
 		return Math.ceil(((ref1.timestamp ?? 0) - (ref2.timestamp ?? 0)) / 1000 / 60)
 	}
 
-	toString(mask?: string, language?: PUtilsDate.PLanguages) {
+	toString(mask?: string, language?: PLanguages) {
 		if (this.isInvalidDate) return ''
 		return PUtilsDate.format(this.engine, mask ?? PDate.defaultMask, language ?? PDate.defaultLanguage)
 	}
