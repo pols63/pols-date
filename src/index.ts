@@ -44,9 +44,17 @@ export class PDate {
 		return this
 	}
 
+	setYear(value: number) {
+		this.year = value
+	}
+
 	get month(): number | undefined {
 		if (this.isInvalidDate) return
 		return (this.engine?.getMonth() ?? 0) + 1
+	}
+
+	set month(value: number) {
+		this.engine?.setMonth(value - 1)
 	}
 
 	addMonth(value: number) {
@@ -55,8 +63,8 @@ export class PDate {
 		return this
 	}
 
-	set month(value: number) {
-		this.engine?.setMonth(value - 1)
+	setMonth(value: number) {
+		this.month = value
 	}
 
 	get week() {
@@ -82,6 +90,10 @@ export class PDate {
 		return this
 	}
 
+	setDay(value: number) {
+		this.day = value
+	}
+
 	get weekDay() {
 		return this.engine?.getDay()
 	}
@@ -90,14 +102,18 @@ export class PDate {
 		return this.engine?.getHours()
 	}
 
+	set hour(value: number) {
+		this.engine?.setHours(value)
+	}
+
 	addHour(value: number) {
 		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.hour = (this.hour ?? 0) + value
 		return this
 	}
 
-	set hour(value: number) {
-		this.engine?.setHours(value)
+	setHour(value: number) {
+		this.hour = value
 	}
 
 	get minute(): number | undefined {
@@ -114,6 +130,10 @@ export class PDate {
 		return this
 	}
 
+	setMinute(value: number) {
+		this.minute = value
+	}
+
 	get second(): number | undefined {
 		return this.engine?.getSeconds()
 	}
@@ -128,6 +148,10 @@ export class PDate {
 		return this
 	}
 
+	setSecond(value: number) {
+		this.second = value
+	}
+
 	get millisecond(): number | undefined {
 		return this.engine?.getMilliseconds()
 	}
@@ -140,6 +164,10 @@ export class PDate {
 		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		this.millisecond = (this.millisecond ?? 0) + value
 		return this
+	}
+
+	setMillisecond(value: number) {
+		this.millisecond = value
 	}
 
 	get timestamp() {
