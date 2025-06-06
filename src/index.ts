@@ -46,6 +46,7 @@ export class PDate {
 
 	setYear(value: number) {
 		this.year = value
+		return this
 	}
 
 	get month(): number | undefined {
@@ -65,6 +66,7 @@ export class PDate {
 
 	setMonth(value: number) {
 		this.month = value
+		return this
 	}
 
 	get week() {
@@ -92,6 +94,7 @@ export class PDate {
 
 	setDay(value: number) {
 		this.day = value
+		return this
 	}
 
 	get weekDay() {
@@ -114,6 +117,7 @@ export class PDate {
 
 	setHour(value: number) {
 		this.hour = value
+		return this
 	}
 
 	get minute(): number | undefined {
@@ -132,6 +136,7 @@ export class PDate {
 
 	setMinute(value: number) {
 		this.minute = value
+		return this
 	}
 
 	get second(): number | undefined {
@@ -150,6 +155,7 @@ export class PDate {
 
 	setSecond(value: number) {
 		this.second = value
+		return this
 	}
 
 	get millisecond(): number | undefined {
@@ -168,6 +174,7 @@ export class PDate {
 
 	setMillisecond(value: number) {
 		this.millisecond = value
+		return this
 	}
 
 	get timestamp() {
