@@ -257,11 +257,11 @@ export class PDate {
 			} else {
 				const match2 = value.match(/^(\d{1,2})(\d{2})$/)
 				if (match2) {
-					value = `${PUtilsString.padStart(match1[1], 2)}:${match1[2]}:00`
+					value = `${PUtilsString.padStart(match2[1], 2)}:${match2[2]}:00`
 				} else {
 					const match3 = value.match(/^(\d{1,2})(\d{2})(\d{2})$/)
 					if (match3) {
-						value = `${PUtilsString.padStart(match1[1], 2)}:${match1[2]}:${match1[3]}`
+						value = `${PUtilsString.padStart(match3[1], 2)}:${match3[2]}:${match3[3]}`
 					}
 				}
 			}
