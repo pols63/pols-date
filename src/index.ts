@@ -1,4 +1,4 @@
-import { PLanguages, PUtilsDate } from "pols-utils"
+import { PLanguages, PUtilsDate, PUtilsString } from "pols-utils"
 
 /**
  * Type for the constructor parameter.
@@ -250,6 +250,21 @@ export class PDate {
 
 	setClockTime(value?: string) {
 		if (value != null) {
+			value = value.replace(/:/g, '')
+			const match1 = value.match(/^(\d{1,2})$/)
+			if (match1) {
+				value = `${PUtilsString.padStart(match1[1], 2)}:00:00`
+			} else {
+				const match2 = value.match(/^(\d{1,2})(\d{2})$/)
+				if (match2) {
+					value = `${PUtilsString.padStart(match1[1], 2)}:${match1[2]}:00`
+				} else {
+					const match3 = value.match(/^(\d{1,2})(\d{2})(\d{2})$/)
+					if (match3) {
+						value = `${PUtilsString.padStart(match1[1], 2)}:${match1[2]}:${match1[2]}`
+					}
+				}
+			}
 			const temp = new Date(`${this.toString('@y-@mm-@dd')} ${value}`)
 			this.engine = temp
 		} else {
