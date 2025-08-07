@@ -261,7 +261,7 @@ export class PDate {
 				} else {
 					const match3 = value.match(/^(\d{1,2})(\d{2})(\d{2})$/)
 					if (match3) {
-						value = `${PUtilsString.padStart(match1[1], 2)}:${match1[2]}:${match1[2]}`
+						value = `${PUtilsString.padStart(match1[1], 2)}:${match1[2]}:${match1[3]}`
 					}
 				}
 			}
