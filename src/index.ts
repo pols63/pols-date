@@ -221,7 +221,7 @@ export class PDate {
 			} else {
 				const today = new Date
 				/* Formato humano */
-				parts = value.match(/^(3[0-1]|[1-2][0-9]|[0-9])(\/)?(1[0-9]|[0-9])?\2?([0-9]{1,4})?(\s([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})(\.([0-9]{1,3}))?$|$)/)
+				parts = value.match(/^(3[0-1]|[1-2][0-9]|0?[0-9])(\/)?(1[0-9]|0?[0-9])?\2?([0-9]{1,4})?(\s([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})(\.([0-9]{1,3}))?$|$)/)
 				if (parts) {
 					day = Number(parts[1])
 					month = parts[3] ? (Number(parts[3]) - 1) : today.getMonth()

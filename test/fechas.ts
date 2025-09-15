@@ -14,5 +14,6 @@ import { PDate } from '../src/index'
 
 // console.log(new PDate('56').toString())
 // console.log(new PDate('5624').toString())
-console.log(new PDate('16').toString())
-console.log(new PDate('312').toString())
+// console.log(new PDate('16').toString())
+// console.log(new PDate('312').toString())
+console.log(new PDate('15/09/2025').toString())
