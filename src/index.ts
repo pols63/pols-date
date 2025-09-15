@@ -221,11 +221,21 @@ export class PDate {
 			} else {
 				const today = new Date
 				/* Formato humano */
-				parts = value.match(/^([0-9]{1,2})(\/)?([0-9]{1,2})?\2?([0-9]{1,4})?(\s([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})(\.([0-9]{1,3}))?$|$)/)
+				parts = value.match(/^(3[0-1]|[1-2][0-9]|[0-9])(\/)?(1[0-9]|[0-9])?\2?([0-9]{1,4})?(\s([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})(\.([0-9]{1,3}))?$|$)/)
 				if (parts) {
 					day = Number(parts[1])
 					month = parts[3] ? (Number(parts[3]) - 1) : today.getMonth()
-					year = Number(parts[4] ?? today.getFullYear())
+					/* Identificación del año */
+					if (parts[4]) {
+						let yearString = ''
+						const fullYear = today.getFullYear().toString()
+						for (let i = 0; i < 4; i++) {
+							yearString += parts[4][parts[4].length - 4 + i] ?? fullYear[i]
+						}
+						year = Number(yearString)
+					} else {
+						year = today.getFullYear()
+					}
 					hours = Number(parts[6] ?? 0)
 					minutes = Number(parts[7] ?? 0)
 					seconds = Number(parts[8] ?? 0)

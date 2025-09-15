@@ -9,4 +9,10 @@ import { PDate } from '../src/index'
 
 // console.log(new PDate('13:00:00'))
 
-console.log(new PDate('2025-03-07').setClockTime('123'))
+// console.log(new PDate('2025-03-07').setClockTime('123'))
+// console.log(new PDate('2025-03-07').setClockTime('23:80:34'))
+
+// console.log(new PDate('56').toString())
+// console.log(new PDate('5624').toString())
+console.log(new PDate('16').toString())
+console.log(new PDate('312').toString())
