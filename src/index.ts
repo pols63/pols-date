@@ -258,6 +258,11 @@ export class PDate {
 		return this
 	}
 
+	setNow() {
+		this.engine = new Date
+		return this
+	}
+
 	setClockTime(value?: string) {
 		if (value != null) {
 			value = value.replace(/:/g, '')
