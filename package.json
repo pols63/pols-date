@@ -1,6 +1,6 @@
 {
 	"name": "pols-date",
-	"version": "1.5.3",
+	"version": "1.6.0",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
