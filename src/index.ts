@@ -312,15 +312,17 @@ export class PDate {
 		return this.difference(other).minutes
 	}
 
-	difference(other: PDate) {
+	difference(other?: PDate) {
 		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
-		if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
-		const ref1 = this.clone()
-		const ref2 = other.clone()
+		if (other) {
+			if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
+		} else {
+			other = new PDate
+		}
 
 		const result = new PDateDifference
 
-		let value = Math.abs(ref1.timestamp - ref2.timestamp)
+		let value = Math.abs(this.timestamp - other.timestamp)
 		for (const unit in UNITS_SCALE) {
 			result[unit] = Math.floor(value / UNITS_SCALE[unit])
 			value %= UNITS_SCALE[unit]

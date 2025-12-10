@@ -23,3 +23,4 @@ const date1 = new PDate('2025-01-01 00:01:00')
 const date2 = new PDate('2025-01-01 00:58:30')
 
 console.log(date1.difference(date2).toString())
+console.log(date1.difference().toString())
