@@ -16,4 +16,10 @@ import { PDate } from '../src/index'
 // console.log(new PDate('5624').toString())
 // console.log(new PDate('16').toString())
 // console.log(new PDate('312').toString())
-console.log(new PDate('15/09/2025').toString())
+// console.log(new PDate('15/09/2025').toString())
+
+
+const date1 = new PDate('2025-01-01 00:01:00')
+const date2 = new PDate('2025-01-01 00:58:30')
+
+console.log(date1.difference(date2).toString())

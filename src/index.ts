@@ -17,6 +17,14 @@ const ERROR_MESSAGES = {
 	isInvalidDate: `The date is invalid`
 }
 
+const UNITS_SCALE = {
+	days: 24 * 60 * 60 * 1000,
+	hours: 60 * 60 * 1000,
+	minutes: 60 * 1000,
+	seconds: 1000,
+	milliseconds: 1
+}
+
 /**
  * Class for managin date and time.
  */
@@ -297,23 +305,28 @@ export class PDate {
 	}
 
 	daysDifference(other: PDate) {
-		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
-		if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
-		const ref1 = this.clone().clearClockTime()
-		const ref2 = other.clone().clearClockTime()
-		return Math.ceil(((ref1.timestamp ?? 0) - (ref2.timestamp ?? 0)) / 1000 / 60 / 60 / 24)
+		return this.difference(other).days
 	}
 
 	minutesDifference(other: PDate) {
+		return this.difference(other).minutes
+	}
+
+	difference(other: PDate) {
 		if (this.isInvalidDate) throw new Error(ERROR_MESSAGES.isInvalidDate)
 		if (other.isInvalidDate) throw new Error(`El objeto de comparación es un InvalidDate`)
 		const ref1 = this.clone()
-		ref1.second = 0
-		ref1.millisecond = 0
 		const ref2 = other.clone()
-		ref2.second = 0
-		ref2.millisecond = 0
-		return Math.ceil(((ref1.timestamp ?? 0) - (ref2.timestamp ?? 0)) / 1000 / 60)
+
+		const result = new PDateDifference
+
+		let value = Math.abs(ref1.timestamp - ref2.timestamp)
+		for (const unit in UNITS_SCALE) {
+			result[unit] = Math.floor(value / UNITS_SCALE[unit])
+			value %= UNITS_SCALE[unit]
+		}
+
+		return result
 	}
 
 	toString(mask?: string, language?: PLanguages) {
@@ -333,5 +346,60 @@ export class PDate {
 
 	toJSON() {
 		return this.toString()
+	}
+}
+
+
+export type PToStringOptions = {
+	labels?: Partial<Record<keyof typeof UNITS_SCALE, [string, string]>>
+
+	/** Mostrar plural automáticamente */
+	pluralize?: boolean
+
+	/** Mostrar elementos con valor 0 */
+	showZero?: boolean
+
+	/** Número máximo de unidades a mostrar (por defecto ilimitado) */
+	maxParts?: number
+}
+
+export class PDateDifference {
+	days = 0
+	hours = 0
+	minutes = 0
+	seconds = 0
+	milliseconds = 0
+
+	toString(options: PToStringOptions = {}) {
+		const {
+			labels = {},
+			pluralize = true,
+			showZero = false,
+			maxParts = Infinity
+		} = options
+
+		const defaultLabels: PToStringOptions['labels'] = {
+			days: ["día", "días"],
+			hours: ["hora", "horas"],
+			minutes: ["minuto", "minutos"],
+			seconds: ["segundo", "segundos"],
+			milliseconds: ["milisegundo", "milisegundos"]
+		}
+
+		const parts: string[] = []
+
+		for (const unit in UNITS_SCALE) {
+			const value = this[unit]
+			if (!showZero && value === 0) continue
+
+			const [single, plural] = labels[unit] ?? defaultLabels[unit]
+			const label = pluralize
+				? (value === 1 ? single : plural)
+				: single // si no se pluraliza, usa siempre la primera forma
+
+			parts.push(`${value} ${label}`)
+		}
+
+		return parts.slice(0, maxParts).join(", ")
 	}
 }
