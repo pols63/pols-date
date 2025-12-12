@@ -1,4 +1,4 @@
-import { PLanguages, PUtilsDate, PUtilsString } from "pols-utils"
+import { PLanguages, PUtilsDate, PUtilsNumber, PUtilsString } from "pols-utils"
 
 /**
  * Type for the constructor parameter.
@@ -372,7 +372,11 @@ export class PDateDifference {
 	seconds = 0
 	milliseconds = 0
 
-	toString(options: PToStringOptions = {}) {
+	toString() {
+		return `${PUtilsNumber.padStart(this.days * 24 + this.hours, 2)}:${PUtilsNumber.padStart(this.minutes, 2)}:${PUtilsNumber.padStart(this.seconds, 2)}.${PUtilsNumber.padStart(this.milliseconds, 2)}`
+	}
+
+	toText(options: PToStringOptions = {}) {
 		const {
 			labels = {},
 			pluralize = true,
