@@ -372,8 +372,18 @@ export class PDateDifference {
 	seconds = 0
 	milliseconds = 0
 
-	toString() {
-		return `${PUtilsNumber.padStart(this.days * 24 + this.hours, 2)}:${PUtilsNumber.padStart(this.minutes, 2)}:${PUtilsNumber.padStart(this.seconds, 2)}.${PUtilsNumber.padStart(this.milliseconds, 2)}`
+	toString(mask = '@hh:@ii:@ss.@lll') {
+		const totalHours = this.days * 24 + this.hours
+		return mask
+			.replace(/@hh/g, PUtilsNumber.padStart(totalHours, 2))
+			.replace(/@h/g, totalHours.toString())
+			.replace(/@ii/g, PUtilsNumber.padStart(this.minutes, 2))
+			.replace(/@i/g, this.minutes.toString())
+			.replace(/@ss/g, PUtilsNumber.padStart(this.seconds, 2))
+			.replace(/@s/g, this.seconds.toString())
+			.replace(/@lll/g, PUtilsNumber.padStart(this.milliseconds, 3))
+			.replace(/@ll/g, PUtilsNumber.padStart(this.milliseconds, 2))
+			.replace(/@l/g, this.milliseconds.toString())
 	}
 
 	toText(options: PToStringOptions = {}) {

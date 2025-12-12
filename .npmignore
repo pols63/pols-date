@@ -1,1 +1,4 @@
 test/
+src/
+docs/
+tsconfig.json
