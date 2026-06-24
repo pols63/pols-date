@@ -78,7 +78,7 @@ const dateWeek = new PDate('2026-01-01') // January 1st
 assert(dateWeek.week === 1, "Week of January 1st should be 1")
 
 const dateFull = new PDate('2026-01-01 00:00') // January 1st
-assert(dateFull.toString() === '2026-01-01 00:00:00', "Week of January 1st should be 1")
+assert(dateFull.toString() === '2026-01-01 00:00:00.000', "Regular date")
 
 // 7. setClockTime / clearClockTime optimization
 const clockDate = new PDate('2026-06-24')
@@ -104,5 +104,7 @@ assert(dateMsPadding2.millisecond === 40, "Millisecond with double digit .04 sho
 // 9. Invalid month validation in human format regex
 const dateInvalidMonth = new PDate('15/15/2026')
 assert(dateInvalidMonth.isInvalidDate, "Should treat month 15 as invalid in human format")
+
+assert(new PDate('7').toString() === '2026-06-07 00:00:00.000', 'Fast create')
 
 console.log("\nAll tests completed successfully! 🎉")

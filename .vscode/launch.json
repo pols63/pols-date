@@ -8,14 +8,11 @@
 			"type": "node",
 			"request": "launch",
 			"name": "npm run test",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
 			"runtimeExecutable": "npm",
 			"runtimeArgs": [
 				"run",
 				"test",
-				"test/fechas.ts"
+				"${relativeFile}",
 			]
 		}
 	]
